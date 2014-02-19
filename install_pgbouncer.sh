@@ -22,6 +22,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+#pgBouncer configuration
+#Modify the configuration file (or the sample configuration file available in etc/pgbouncer.ini of the source code copied over to /usr/local/etc/pgbouncer.ini):
+
+#Modify the [databases] section to look like this (if your server is on your local machine on the default port):
+#[databases]
+#* = host=127.0.0.1 port=5432
+#In [pgbouncer] section:
+#Set the listening port for example to:
+#listen_port = 6432
+#Set the authorization file, if using PostgreSQL 8.x on default settings:
+#auth_file = /var/lib/postgresql/<your postgres version, ie. 8.3>/main/global/pg_auth
+#Set the log and pid files:
+#logfile = /var/log/pgbouncer.log
+#pidfile = /tmp/pgbouncer.pid
+#You have to set the user pgBouncer will run as:
+#user = postgres
+#You can choose any user, as long as it’s not root. We will not dwell about security here.
+
+#Run by executing:
+#su -l postgres -c "pgbouncer -d /usr/local/etc/pgbouncer.ini"
+#Modify the settings.py file, set the database port accordingly (in this example – 6432).
+#Done. Let’s get it smoking:
+
 apt-get install libevent-dev
 cd /tmp
 wget http://pgfoundry.org/frs/download.php/3085/pgbouncer-1.4.2.tgz
